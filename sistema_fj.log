@@ -1,0 +1,267 @@
+2026-11-20 11:00:48 | INFO     | manager | [OK] Cliente [CLI-01] Laura Martínez | Email: laura.m@empresa.com | Tel: 3104567890
+2026-11-20 11:00:48 | DEBUG    | manager | Finalizó intento de registro para cliente ID=CLI-01.
+2026-11-20 11:00:48 | INFO     | manager | [OK] Cliente [CLI-02] Carlos Gómez | Email: cgomez@tech.co | Tel: 3209876543
+2026-11-20 11:00:48 | DEBUG    | manager | Finalizó intento de registro para cliente ID=CLI-02.
+2026-11-20 11:00:48 | ERROR    | manager | [FALLO REGISTRO CLIENTE] Correo electrónico inválido: 'correo_sin_arroba.com'.
+Traceback (most recent call last):
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 22, in registrar_cliente
+    nuevo_cliente = Cliente(id_c, nombre, correo, telefono)
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 46, in __init__
+    self.correo = correo
+    ^^^^^^^^^^^
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 66, in correo
+    raise DatoInvalidoError(f"Correo electrónico inválido: '{valor}'.")
+exceptions.DatoInvalidoError: Correo electrónico inválido: 'correo_sin_arroba.com'.
+2026-11-20 11:00:49 | DEBUG    | manager | Finalizó intento de registro para cliente ID=CLI-03.
+2026-11-20 11:00:49 | ERROR    | manager | [FALLO REGISTRO CLIENTE] Ya existe un cliente registrado con ID 'CLI-01'.
+Traceback (most recent call last):
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 21, in registrar_cliente
+    raise OperacionNoPermitidaError(f"Ya existe un cliente registrado con ID '{id_c}'.")
+exceptions.OperacionNoPermitidaError: Ya existe un cliente registrado con ID 'CLI-01'.
+2026-11-20 11:00:49 | DEBUG    | manager | Finalizó intento de registro para cliente ID=CLI-01.
+2026-11-20 11:00:49 | INFO     | manager | [OK] Servicio agregado: Sala [SRV-01] Sala Innovación A (Cap: 12, con proyector) - $80,000/h
+2026-11-20 11:00:49 | DEBUG    | manager | Verificación de inventario de servicios completada.
+2026-11-20 11:00:49 | INFO     | manager | [OK] Servicio agregado: Equipo [SRV-02] Workstation Dell XPS (SN: DL-998877) - $25,000/h
+2026-11-20 11:00:49 | DEBUG    | manager | Verificación de inventario de servicios completada.
+2026-11-20 11:00:49 | INFO     | manager | [OK] Servicio agregado: Asesoría [SRV-03] Arquitectura AWS (Cloud Computing - Senior) - $120,000/h
+2026-11-20 11:00:49 | DEBUG    | manager | Verificación de inventario de servicios completada.
+2026-11-20 11:00:49 | ERROR    | main | [FALLO CREACIÓN SERVICIO] La tarifa base debe ser mayor a 0. Recibido: -50000
+Traceback (most recent call last):
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\main.py", line 35, in ejecutar_simulacion
+    servicio_malo = ReservaSala("SRV-04", "Sala Fantasma", -50000, capacidad=5)
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 158, in __init__
+    super().__init__(id_servicio, nombre, tarifa_base)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 92, in __init__
+    raise DatoInvalidoError(f"La tarifa base debe ser mayor a 0. Recibido: {tarifa_base}")
+exceptions.DatoInvalidoError: La tarifa base debe ser mayor a 0. Recibido: -50000
+2026-11-20 11:00:49 | INFO     | manager | [OK] Reserva [RES-01] | Estado: CONFIRMADA | Cliente: Laura Martínez | Servicio: Sala Innovación A | Horas: 4.0 | Total: $358,785.00
+2026-11-20 11:00:49 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-01'.
+2026-11-20 11:00:49 | ERROR    | manager | [FALLO RESERVA RES-02] El servicio 'Sala Innovación A' no está disponible actualmente.
+Traceback (most recent call last):
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 80, in crear_y_confirmar_reserva
+    reserva = Reserva(id_r, cliente, servicio, duracion_horas)
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 236, in __init__
+    raise ServicioNoDisponibleError(f"El servicio '{servicio.nombre}' no está disponible actualmente.")
+exceptions.ServicioNoDisponibleError: El servicio 'Sala Innovación A' no está disponible actualmente.
+2026-11-20 11:00:49 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-02'.
+2026-11-20 11:00:49 | ERROR    | manager | [FALLO RESERVA RES-03] El alquiler mínimo de equipos es de 2 horas.
+Traceback (most recent call last):
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 80, in crear_y_confirmar_reserva
+    reserva = Reserva(id_r, cliente, servicio, duracion_horas)
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 238, in __init__
+    servicio.validar_parametros_uso(duracion_horas)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 192, in validar_parametros_uso
+    raise DatoInvalidoError("El alquiler mínimo de equipos es de 2 horas.")
+exceptions.DatoInvalidoError: El alquiler mínimo de equipos es de 2 horas.
+2026-11-20 11:00:49 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-03'.
+2026-11-20 11:00:49 | INFO     | manager | [OK] Reserva [RES-04] | Estado: CONFIRMADA | Cliente: Carlos Gómez | Servicio: Arquitectura AWS | Horas: 5.0 | Total: $940,100.00
+2026-11-20 11:00:49 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-04'.
+2026-11-20 11:00:49 | ERROR    | manager | [FALLO RESERVA RES-05] Imposible iniciar reserva 'RES-05' por referencias inexistentes. | Causa original: No se encontró cliente con ID 'CLI-999'.
+Traceback (most recent call last):
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 72, in crear_y_confirmar_reserva
+    cliente = self.buscar_cliente(id_cliente)
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 53, in buscar_cliente
+    raise DatoInvalidoError(f"No se encontró cliente con ID '{id_c}'.")
+exceptions.DatoInvalidoError: No se encontró cliente con ID 'CLI-999'.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 76, in crear_y_confirmar_reserva
+    raise OperacionNoPermitidaError(
+        f"Imposible iniciar reserva '{id_r}' por referencias inexistentes."
+    ) from err_busqueda
+exceptions.OperacionNoPermitidaError: Imposible iniciar reserva 'RES-05' por referencias inexistentes.
+2026-11-20 11:00:49 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-05'.
+2026-11-20 11:00:49 | INFO     | manager | [OK] Reserva RES-01 ejecutada y facturada por $358,785.00.
+2026-11-20 11:00:49 | ERROR    | manager | [FALLO CANCELACIÓN] La reserva RES-01 ya fue procesada/facturada y no puede cancelarse.
+Traceback (most recent call last):
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 110, in cancelar_reserva
+    reserva.cancelar()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 274, in cancelar
+    raise OperacionNoPermitidaError(f"La reserva {self.id_entidad} ya fue procesada/facturada y no puede cancelarse.")
+exceptions.OperacionNoPermitidaError: La reserva RES-01 ya fue procesada/facturada y no puede cancelarse.
+2026-11-20 11:00:49 | INFO     | manager | [OK] Reserva 'RES-04' cancelada y recurso liberado.
+2026-11-20 11:00:49 | INFO     | manager | [OK] Reserva [RES-06] | Estado: CONFIRMADA | Cliente: Laura Martínez | Servicio: Workstation Dell XPS | Horas: 3.0 | Total: $148,750.00
+2026-11-20 11:00:49 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-06'.
+2026-11-20 11:11:13 | INFO     | manager | [OK] Cliente [CLI-01] Laura Martínez | Email: laura.m@empresa.com | Tel: 3104567890
+2026-11-20 11:11:13 | DEBUG    | manager | Finalizó intento de registro para cliente ID=CLI-01.
+2026-11-20 11:11:13 | INFO     | manager | [OK] Cliente [CLI-02] Carlos Gómez | Email: cgomez@tech.co | Tel: 3209876543
+2026-11-20 11:11:13 | DEBUG    | manager | Finalizó intento de registro para cliente ID=CLI-02.
+2026-11-20 11:11:13 | ERROR    | manager | [FALLO REGISTRO CLIENTE] Correo electrónico inválido: 'correo_sin_arroba.com'.
+Traceback (most recent call last):
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 22, in registrar_cliente
+    nuevo_cliente = Cliente(id_c, nombre, correo, telefono)
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 46, in __init__
+    self.correo = correo
+    ^^^^^^^^^^^
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 66, in correo
+    raise DatoInvalidoError(f"Correo electrónico inválido: '{valor}'.")
+exceptions.DatoInvalidoError: Correo electrónico inválido: 'correo_sin_arroba.com'.
+2026-11-20 11:11:13 | DEBUG    | manager | Finalizó intento de registro para cliente ID=CLI-03.
+2026-11-20 11:11:13 | ERROR    | manager | [FALLO REGISTRO CLIENTE] Ya existe un cliente registrado con ID 'CLI-01'.
+Traceback (most recent call last):
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 21, in registrar_cliente
+    raise OperacionNoPermitidaError(f"Ya existe un cliente registrado con ID '{id_c}'.")
+exceptions.OperacionNoPermitidaError: Ya existe un cliente registrado con ID 'CLI-01'.
+2026-11-20 11:11:13 | DEBUG    | manager | Finalizó intento de registro para cliente ID=CLI-01.
+2026-11-20 11:11:13 | INFO     | manager | [OK] Servicio agregado: Sala [SRV-01] Sala Innovación A (Cap: 12, con proyector) - $80,000/h
+2026-11-20 11:11:13 | DEBUG    | manager | Verificación de inventario de servicios completada.
+2026-11-20 11:11:13 | INFO     | manager | [OK] Servicio agregado: Equipo [SRV-02] Workstation Dell XPS (SN: DL-998877) - $25,000/h
+2026-11-20 11:11:13 | DEBUG    | manager | Verificación de inventario de servicios completada.
+2026-11-20 11:11:13 | INFO     | manager | [OK] Servicio agregado: Asesoría [SRV-03] Arquitectura AWS (Cloud Computing - Senior) - $120,000/h
+2026-11-20 11:11:13 | DEBUG    | manager | Verificación de inventario de servicios completada.
+2026-11-20 11:11:13 | ERROR    | main | [FALLO CREACIÓN SERVICIO] La tarifa base debe ser mayor a 0. Recibido: -50000
+Traceback (most recent call last):
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\main.py", line 35, in ejecutar_simulacion
+    servicio_malo = ReservaSala("SRV-04", "Sala Fantasma", -50000, capacidad=5)
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 158, in __init__
+    super().__init__(id_servicio, nombre, tarifa_base)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 92, in __init__
+    raise DatoInvalidoError(f"La tarifa base debe ser mayor a 0. Recibido: {tarifa_base}")
+exceptions.DatoInvalidoError: La tarifa base debe ser mayor a 0. Recibido: -50000
+2026-11-20 11:11:13 | INFO     | manager | [OK] Reserva [RES-01] | Estado: CONFIRMADA | Cliente: Laura Martínez | Servicio: Sala Innovación A | Horas: 4.0 | Total: $358,785.00
+2026-11-20 11:11:13 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-01'.
+2026-11-20 11:11:13 | ERROR    | manager | [FALLO RESERVA RES-02] El servicio 'Sala Innovación A' no está disponible actualmente.
+Traceback (most recent call last):
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 80, in crear_y_confirmar_reserva
+    reserva = Reserva(id_r, cliente, servicio, duracion_horas)
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 236, in __init__
+    raise ServicioNoDisponibleError(f"El servicio '{servicio.nombre}' no está disponible actualmente.")
+exceptions.ServicioNoDisponibleError: El servicio 'Sala Innovación A' no está disponible actualmente.
+2026-11-20 11:11:13 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-02'.
+2026-11-20 11:11:13 | ERROR    | manager | [FALLO RESERVA RES-03] El alquiler mínimo de equipos es de 2 horas.
+Traceback (most recent call last):
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 80, in crear_y_confirmar_reserva
+    reserva = Reserva(id_r, cliente, servicio, duracion_horas)
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 238, in __init__
+    servicio.validar_parametros_uso(duracion_horas)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 192, in validar_parametros_uso
+    raise DatoInvalidoError("El alquiler mínimo de equipos es de 2 horas.")
+exceptions.DatoInvalidoError: El alquiler mínimo de equipos es de 2 horas.
+2026-11-20 11:11:13 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-03'.
+2026-11-20 11:11:13 | INFO     | manager | [OK] Reserva [RES-04] | Estado: CONFIRMADA | Cliente: Carlos Gómez | Servicio: Arquitectura AWS | Horas: 5.0 | Total: $940,100.00
+2026-11-20 11:11:13 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-04'.
+2026-11-20 11:11:13 | ERROR    | manager | [FALLO RESERVA RES-05] Imposible iniciar reserva 'RES-05' por referencias inexistentes. | Causa original: No se encontró cliente con ID 'CLI-999'.
+Traceback (most recent call last):
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 72, in crear_y_confirmar_reserva
+    cliente = self.buscar_cliente(id_cliente)
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 53, in buscar_cliente
+    raise DatoInvalidoError(f"No se encontró cliente con ID '{id_c}'.")
+exceptions.DatoInvalidoError: No se encontró cliente con ID 'CLI-999'.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 76, in crear_y_confirmar_reserva
+    raise OperacionNoPermitidaError(
+        f"Imposible iniciar reserva '{id_r}' por referencias inexistentes."
+    ) from err_busqueda
+exceptions.OperacionNoPermitidaError: Imposible iniciar reserva 'RES-05' por referencias inexistentes.
+2026-11-20 11:11:13 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-05'.
+2026-11-20 11:11:13 | INFO     | manager | [OK] Reserva RES-01 ejecutada y facturada por $358,785.00.
+2026-11-20 11:11:13 | ERROR    | manager | [FALLO CANCELACIÓN] La reserva RES-01 ya fue procesada/facturada y no puede cancelarse.
+Traceback (most recent call last):
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 110, in cancelar_reserva
+    reserva.cancelar()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 274, in cancelar
+    raise OperacionNoPermitidaError(f"La reserva {self.id_entidad} ya fue procesada/facturada y no puede cancelarse.")
+exceptions.OperacionNoPermitidaError: La reserva RES-01 ya fue procesada/facturada y no puede cancelarse.
+2026-11-20 11:11:13 | INFO     | manager | [OK] Reserva 'RES-04' cancelada y recurso liberado.
+2026-11-20 11:11:13 | INFO     | manager | [OK] Reserva [RES-06] | Estado: CONFIRMADA | Cliente: Laura Martínez | Servicio: Workstation Dell XPS | Horas: 3.0 | Total: $148,750.00
+2026-11-20 11:11:13 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-06'.
+2026-11-20 11:43:01 | INFO     | manager | [OK] Cliente [CLI-01] Laura Martínez | Email: laura.m@empresa.com | Tel: 3104567890
+2026-11-20 11:43:01 | DEBUG    | manager | Finalizó intento de registro para cliente ID=CLI-01.
+2026-11-20 11:43:01 | INFO     | manager | [OK] Cliente [CLI-02] Carlos Gómez | Email: cgomez@tech.co | Tel: 3209876543
+2026-11-20 11:43:01 | DEBUG    | manager | Finalizó intento de registro para cliente ID=CLI-02.
+2026-11-20 11:43:01 | ERROR    | manager | [FALLO REGISTRO CLIENTE] Correo electrónico inválido: 'correo_sin_arroba.com'.
+Traceback (most recent call last):
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 22, in registrar_cliente
+    nuevo_cliente = Cliente(id_c, nombre, correo, telefono)
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 46, in __init__
+    self.correo = correo
+    ^^^^^^^^^^^
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 66, in correo
+    raise DatoInvalidoError(f"Correo electrónico inválido: '{valor}'.")
+exceptions.DatoInvalidoError: Correo electrónico inválido: 'correo_sin_arroba.com'.
+2026-11-20 11:43:01 | DEBUG    | manager | Finalizó intento de registro para cliente ID=CLI-03.
+2026-11-20 11:43:01 | ERROR    | manager | [FALLO REGISTRO CLIENTE] Ya existe un cliente registrado con ID 'CLI-01'.
+Traceback (most recent call last):
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 21, in registrar_cliente
+    raise OperacionNoPermitidaError(f"Ya existe un cliente registrado con ID '{id_c}'.")
+exceptions.OperacionNoPermitidaError: Ya existe un cliente registrado con ID 'CLI-01'.
+2026-11-20 11:43:01 | DEBUG    | manager | Finalizó intento de registro para cliente ID=CLI-01.
+2026-11-20 11:43:01 | INFO     | manager | [OK] Servicio agregado: Sala [SRV-01] Sala Innovación A (Cap: 12, con proyector) - $80,000/h
+2026-11-20 11:43:01 | DEBUG    | manager | Verificación de inventario de servicios completada.
+2026-11-20 11:43:01 | INFO     | manager | [OK] Servicio agregado: Equipo [SRV-02] Workstation Dell XPS (SN: DL-998877) - $25,000/h
+2026-11-20 11:43:01 | DEBUG    | manager | Verificación de inventario de servicios completada.
+2026-11-20 11:43:01 | INFO     | manager | [OK] Servicio agregado: Asesoría [SRV-03] Arquitectura AWS (Cloud Computing - Senior) - $120,000/h
+2026-11-20 11:43:01 | DEBUG    | manager | Verificación de inventario de servicios completada.
+2026-11-20 11:43:01 | ERROR    | main | [FALLO CREACIÓN SERVICIO] La tarifa base debe ser mayor a 0. Recibido: -50000
+Traceback (most recent call last):
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\main.py", line 35, in ejecutar_simulacion
+    servicio_malo = ReservaSala("SRV-04", "Sala Fantasma", -50000, capacidad=5)
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 158, in __init__
+    super().__init__(id_servicio, nombre, tarifa_base)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 92, in __init__
+    raise DatoInvalidoError(f"La tarifa base debe ser mayor a 0. Recibido: {tarifa_base}")
+exceptions.DatoInvalidoError: La tarifa base debe ser mayor a 0. Recibido: -50000
+2026-11-20 11:43:01 | INFO     | manager | [OK] Reserva [RES-01] | Estado: CONFIRMADA | Cliente: Laura Martínez | Servicio: Sala Innovación A | Horas: 4.0 | Total: $358,785.00
+2026-11-20 11:43:01 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-01'.
+2026-11-20 11:43:01 | ERROR    | manager | [FALLO RESERVA RES-02] El servicio 'Sala Innovación A' no está disponible actualmente.
+Traceback (most recent call last):
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 80, in crear_y_confirmar_reserva
+    reserva = Reserva(id_r, cliente, servicio, duracion_horas)
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 236, in __init__
+    raise ServicioNoDisponibleError(f"El servicio '{servicio.nombre}' no está disponible actualmente.")
+exceptions.ServicioNoDisponibleError: El servicio 'Sala Innovación A' no está disponible actualmente.
+2026-11-20 11:43:01 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-02'.
+2026-11-20 11:43:01 | ERROR    | manager | [FALLO RESERVA RES-03] El alquiler mínimo de equipos es de 2 horas.
+Traceback (most recent call last):
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 80, in crear_y_confirmar_reserva
+    reserva = Reserva(id_r, cliente, servicio, duracion_horas)
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 238, in __init__
+    servicio.validar_parametros_uso(duracion_horas)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 192, in validar_parametros_uso
+    raise DatoInvalidoError("El alquiler mínimo de equipos es de 2 horas.")
+exceptions.DatoInvalidoError: El alquiler mínimo de equipos es de 2 horas.
+2026-11-20 11:43:01 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-03'.
+2026-11-20 11:43:01 | INFO     | manager | [OK] Reserva [RES-04] | Estado: CONFIRMADA | Cliente: Carlos Gómez | Servicio: Arquitectura AWS | Horas: 5.0 | Total: $940,100.00
+2026-11-20 11:43:01 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-04'.
+2026-11-20 11:43:01 | ERROR    | manager | [FALLO RESERVA RES-05] Imposible iniciar reserva 'RES-05' por referencias inexistentes. | Causa original: No se encontró cliente con ID 'CLI-999'.
+Traceback (most recent call last):
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 72, in crear_y_confirmar_reserva
+    cliente = self.buscar_cliente(id_cliente)
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 53, in buscar_cliente
+    raise DatoInvalidoError(f"No se encontró cliente con ID '{id_c}'.")
+exceptions.DatoInvalidoError: No se encontró cliente con ID 'CLI-999'.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 76, in crear_y_confirmar_reserva
+    raise OperacionNoPermitidaError(
+        f"Imposible iniciar reserva '{id_r}' por referencias inexistentes."
+    ) from err_busqueda
+exceptions.OperacionNoPermitidaError: Imposible iniciar reserva 'RES-05' por referencias inexistentes.
+2026-11-20 11:43:01 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-05'.
+2026-11-20 11:43:01 | INFO     | manager | [OK] Reserva RES-01 ejecutada y facturada por $358,785.00.
+2026-11-20 11:43:01 | ERROR    | manager | [FALLO CANCELACIÓN] La reserva RES-01 ya fue procesada/facturada y no puede cancelarse.
+Traceback (most recent call last):
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\manager.py", line 110, in cancelar_reserva
+    reserva.cancelar()
+    ~~~~~~~~~~~~~~~~^^
+  File "c:\Users\pc\SoftwareFJ-GestionReservas-UNAD\models.py", line 274, in cancelar
+    raise OperacionNoPermitidaError(f"La reserva {self.id_entidad} ya fue procesada/facturada y no puede cancelarse.")
+exceptions.OperacionNoPermitidaError: La reserva RES-01 ya fue procesada/facturada y no puede cancelarse.
+2026-11-20 11:43:01 | INFO     | manager | [OK] Reserva 'RES-04' cancelada y recurso liberado.
+2026-11-20 11:43:01 | INFO     | manager | [OK] Reserva [RES-06] | Estado: CONFIRMADA | Cliente: Laura Martínez | Servicio: Workstation Dell XPS | Horas: 3.0 | Total: $148,750.00
+2026-11-20 11:43:01 | DEBUG    | manager | Cierre de transacción en memoria para reserva 'RES-06'.
